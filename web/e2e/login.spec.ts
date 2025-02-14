@@ -39,4 +39,14 @@ test.describe('Página de Login', () => {
       await paginaLogin.mensagemCampoObrigatorio(mensagem);
     }
   });
+
+  test('Não deve conseguir fazer login com formato de email inválido', async ({ page }) => {
+
+    await paginaLogin.visitar('/');
+    await paginaLogin.clickLogin();
+    await paginaLogin.exibirLoginForm();
+    await paginaLogin.fazerLogin('email_invalido');
+
+    await paginaLogin.mensagemCampoObrigatorio('E-mail inválido');
+  });
 });
