@@ -25,4 +25,18 @@ test.describe('Página de Login', () => {
     await paginaLogin.fazerLogin('teste.erro@teste.com', '1111');
     await paginaLogin.mensagemLoginInvalido('Você não está autorizado a acessar este recurso');
   });
+
+  test('Não deve conseguir fazer login com campos de email e senha vazios', async ({ page }) => {
+
+    const campoObritatorio = ['E-mail é obrigatório', 'Senha é obrigatória'];
+
+    await paginaLogin.visitar('/');
+    await paginaLogin.clickLogin();
+    await paginaLogin.exibirLoginForm();
+    await paginaLogin.fazerLogin();
+
+    for (const mensagem of campoObritatorio) {
+      await paginaLogin.mensagemCampoObrigatorio(mensagem);
+    }
+  });
 });
