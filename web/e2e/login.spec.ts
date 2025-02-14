@@ -49,4 +49,25 @@ test.describe('Página de Login', () => {
 
     await paginaLogin.mensagemCampoObrigatorio('E-mail inválido');
   });
+
+  test('Não deve conseguir fazer login após interceptar os dados', async ({ page }) => {
+
+    const usuario = {
+      email: 'teste@teste.com',
+      senha: '1111',
+    };
+
+    await page.route('**/auth/login', router => router.fulfill({
+      status: 401,
+      body: JSON.stringify(usuario)
+    }));
+
+    await paginaLogin.visitar('/');
+    await paginaLogin.clickLogin();
+    await paginaLogin.exibirLoginForm();
+    await paginaLogin.fazerLogin(usuario.email, usuario.senha);
+  
+    await paginaLogin.mensagemLoginInvalido('Você não está autorizado a acessar este recurso');
+  
+  });
 });
