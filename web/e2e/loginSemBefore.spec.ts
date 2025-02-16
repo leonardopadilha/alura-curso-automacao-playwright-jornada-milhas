@@ -1,36 +1,26 @@
-import { test } from '@playwright/test';
-import PaginaLogin from './page-objects/PaginaLogin';
-
-let paginaLogin: PaginaLogin;
-
-test.beforeEach(({ page }) => {
-  paginaLogin = new PaginaLogin(page);
-});
+import { test } from './page-objects/PaginaLogin';
 
 test.describe('Página de Login', () => {
-  test('Deve conseguir fazer login com email e senha válidos', async ({ page }) => {
+  test('Deve conseguir fazer login com email e senha válidos', async ({ paginaLogin }) => {
     
-    await paginaLogin.visitar('/');
     await paginaLogin.clickLogin();
     await paginaLogin.exibirLoginForm();
     await paginaLogin.fazerLogin('teste@teste.com', '1111');
     await paginaLogin.loginFeitoComSucesso('/home');
   });
 
-  test('Não deve conseguir fazer login com email inválido e senha válida', async ({ page }) => {
+  test('Não deve conseguir fazer login com email inválido e senha válida', async ({ paginaLogin }) => {
 
-    await paginaLogin.visitar('/');
     await paginaLogin.clickLogin();
     await paginaLogin.exibirLoginForm();
     await paginaLogin.fazerLogin('teste.erro@teste.com', '1111');
     await paginaLogin.mensagemLoginInvalido('Você não está autorizado a acessar este recurso');
   });
 
-  test('Não deve conseguir fazer login com campos de email e senha vazios', async ({ page }) => {
+  test('Não deve conseguir fazer login com campos de email e senha vazios', async ({ paginaLogin }) => {
 
     const campoObritatorio = ['E-mail é obrigatório', 'Senha é obrigatória'];
 
-    await paginaLogin.visitar('/');
     await paginaLogin.clickLogin();
     await paginaLogin.exibirLoginForm();
     await paginaLogin.fazerLogin();
@@ -40,9 +30,8 @@ test.describe('Página de Login', () => {
     }
   });
 
-  test('Não deve conseguir fazer login com formato de email inválido', async ({ page }) => {
+  test('Não deve conseguir fazer login com formato de email inválido', async ({ paginaLogin }) => {
 
-    await paginaLogin.visitar('/');
     await paginaLogin.clickLogin();
     await paginaLogin.exibirLoginForm();
     await paginaLogin.fazerLogin('email_invalido');
@@ -50,7 +39,7 @@ test.describe('Página de Login', () => {
     await paginaLogin.mensagemCampoObrigatorio('E-mail inválido');
   });
 
-  test('Não deve conseguir fazer login após interceptar os dados', async ({ page }) => {
+  test('Não deve conseguir fazer login após interceptar os dados', async ({ paginaLogin, page }) => {
 
     const usuario = {
       email: 'teste@teste.com',
@@ -62,12 +51,10 @@ test.describe('Página de Login', () => {
       body: JSON.stringify(usuario)
     }));
 
-    await paginaLogin.visitar('/');
     await paginaLogin.clickLogin();
     await paginaLogin.exibirLoginForm();
     await paginaLogin.fazerLogin(usuario.email, usuario.senha);
   
     await paginaLogin.mensagemLoginInvalido('Você não está autorizado a acessar este recurso');
-  
   });
 });
