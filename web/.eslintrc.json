@@ -40,7 +40,12 @@
         ],
         "semi": [
           "error", "always"
-        ]
+        ],
+        "@typescript-eslint/no-floating-promises": "error"
+      },
+      "parserOptions": {
+        "project": true,
+        "tsconfigRootDir": "./"
       }
     },
     {

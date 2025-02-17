@@ -9,7 +9,7 @@ O Jornada Milhas é uma StartUP fictícia. Atualmente, é um site onde podemos b
 
 ## 🔨 Funcionalidades do projeto
 
-O projeto já está bastante completo, mas agora iremos implementar testes E2E (*End-to-end*), a fim de aumentar a confiabilidade e qualidade do sistema.
+O projeto está bastante completo e já conta alguns testes E2E (*End-to-end*) feitos em Playwright. O próximo passo é implementar testes E2E das páginas que ainda não foram testadas: as de cadastro e de edição de perfil.
 
 Acesse o [Figma do Jornada Milhas](https://www.figma.com/file/yz38uH9MvA69Ub3FxNUbTP/Angular-Playwright-%7C-Jornada-Milhas?type=design&node-id=0-1&mode=design).
 
