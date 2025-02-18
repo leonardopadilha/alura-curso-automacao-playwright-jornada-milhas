@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import PaginaLogin from './page-objects/PaginaLogin_before';
+import PaginaLogin from '../page-objects/PaginaLogin_before';
 
 let paginaLogin: PaginaLogin;
 

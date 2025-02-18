@@ -1,13 +1,4 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { test as base } from '@playwright/test';
-
-export const test = base.extend<{ paginaLogin: PaginaLogin }>({
-  paginaLogin: async ({ page }, use) => {
-    const paginaLogin = new PaginaLogin(page);
-    await paginaLogin.visitar();
-    await use(paginaLogin);
-  }
-});
 
 export default class PaginaLogin {
   private readonly page: Page;
@@ -63,9 +54,9 @@ export default class PaginaLogin {
   }
 
   async loginFeitoComSucesso(endereco: string) {
-    expect(this.page).toHaveURL(endereco);
-    expect(this.iconePessoaUsuaria).toBeVisible();
-    expect(this.botaoLogin).not.toBeVisible();
+    await expect(this.page).toHaveURL(endereco);
+    await expect(this.iconePessoaUsuaria).toBeVisible();
+    await expect(this.botaoLogin).not.toBeVisible();
   }
 
   async mensagemLoginInvalido(mensagem: string) {
