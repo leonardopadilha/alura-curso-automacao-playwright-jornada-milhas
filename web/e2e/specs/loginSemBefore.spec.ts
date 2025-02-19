@@ -19,13 +19,13 @@ test.describe('Página de Login', () => {
 
   test('Não deve conseguir fazer login com campos de email e senha vazios', async ({ paginaLogin }) => {
 
-    const campoObritatorio = ['E-mail é obrigatório', 'Senha é obrigatória'];
+    const campoObrigatorio = ['E-mail é obrigatório', 'Senha é obrigatória'];
 
     await paginaLogin.clickLogin();
     await paginaLogin.exibirLoginForm();
     await paginaLogin.fazerLogin();
 
-    for (const mensagem of campoObritatorio) {
+    for (const mensagem of campoObrigatorio) {
       await paginaLogin.mensagemCampoObrigatorio(mensagem);
     }
   });
