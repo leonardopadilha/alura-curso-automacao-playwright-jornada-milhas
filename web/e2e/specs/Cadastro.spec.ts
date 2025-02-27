@@ -4,8 +4,7 @@ import { test } from "e2e/setup/fixtures";
 test.describe('Página de cadastro', () => {
   let novoUsuario: Perfil;
   
-  test.beforeEach(async({ paginaCadastro }) => {
-    await paginaCadastro.visitar();
+  test.beforeEach(() => {
     novoUsuario = gerarPerfil();
   });
 
