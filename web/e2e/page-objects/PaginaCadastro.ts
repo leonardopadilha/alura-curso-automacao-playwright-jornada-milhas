@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { Genero, Perfil } from 'e2e/operacoes/gerarPerfil';
+import { Perfil } from 'e2e/operacoes/gerarPerfil';
 import FormBaseCadastroEPerfil from "./FormBaseCadastroEPerfil";
 
 export default class PaginaCadastro {
