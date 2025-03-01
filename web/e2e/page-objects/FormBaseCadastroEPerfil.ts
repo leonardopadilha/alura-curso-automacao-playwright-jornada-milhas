@@ -1,20 +1,20 @@
 import { formatarDataParaForm } from 'e2e/operacoes/datas';
-import { Genero } from 'e2e/operacoes/gerarPerfil';
+import { Genero, Perfil } from 'e2e/operacoes/gerarPerfil';
 import { Locator, Page } from 'playwright/test';
 
 export default class FormBaseCadastroEPerfil {
-  private readonly inputNome: Locator;
-  private readonly inputDataNascimento: Locator;
-  private readonly radiosGenero: { [chave in Genero]: Locator };
-  private readonly inputCpf: Locator;
-  private readonly inputCidade: Locator;
-  private readonly inputTelefone: Locator;
-  private readonly inputEstado: Locator;
-  private readonly inputEmail: Locator;
-  private readonly inputSenha: Locator;
-  private readonly inputConfirmarEmail: Locator;
-  private readonly inputConfirmarSenha: Locator;
-  private readonly botaoSubmeterForm: Locator;
+  readonly inputNome: Locator;
+  readonly inputDataNascimento: Locator;
+  readonly radiosGenero: { [chave in Genero]: Locator };
+  readonly inputCpf: Locator;
+  readonly inputCidade: Locator;
+  readonly inputTelefone: Locator;
+  readonly inputEstado: Locator;
+  readonly inputEmail: Locator;
+  readonly inputSenha: Locator;
+  readonly inputConfirmarEmail: Locator;
+  readonly inputConfirmarSenha: Locator;
+  readonly botaoSubmeterForm: Locator;
 
   constructor(page: Page) {
     this.inputNome = page.getByTestId('form-base-input-nome');
@@ -100,7 +100,26 @@ export default class FormBaseCadastroEPerfil {
     await this.inputConfirmarSenha.fill(senha);
   }
 
+  async preencherForm(dados: Perfil) {
+    await this.definirNome(dados.nome);
+    await this.definirDataNascimento(dados.dataNascimento);
+    await this.definirGenero(dados.genero);
+    await this.definirCPF(dados.cpf);
+    await this.definirTelefone(dados.telefone);
+    await this.definirCidade(dados.cidade);
+    await this.definirEstado(dados.estado);
+
+    await this.definirEmail(dados.email);
+    await this.confirmarEmail(dados.email);
+    await this.definirSenha(dados.senha);
+    await this.confirmarSenha(dados.senha);
+  }
+
   async submeterForm() {
     await this.botaoSubmeterForm.click();
+  }
+
+  async obterValorInputEmail() {
+    return await this.inputEmail.inputValue();
   }
 }
