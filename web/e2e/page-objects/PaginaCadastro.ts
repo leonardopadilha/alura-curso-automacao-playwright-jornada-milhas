@@ -30,18 +30,7 @@ export default class PaginaCadastro {
   }
 
   async cadastrarUsuario(usuario: Perfil) {
-    await this.formBase.definirNome(usuario.nome);
-    await this.formBase.definirDataNascimento(usuario.dataNascimento);
-    await this.formBase.definirGenero(usuario.genero);
-    await this.formBase.definirCPF(usuario.cpf);
-    await this.formBase.definirTelefone(usuario.telefone);
-    await this.formBase.definirCidade(usuario.cidade);
-    await this.formBase.definirEstado(usuario.estado);
-
-    await this.formBase.definirEmail(usuario.email);
-    await this.formBase.confirmarEmail(usuario.email);
-    await this.formBase.definirSenha(usuario.senha);
-    await this.formBase.confirmarSenha(usuario.senha);
+    await this.formBase.preencherForm(usuario);
     await this.confirmarTermos();
     await this.formBase.submeterForm();
   }
